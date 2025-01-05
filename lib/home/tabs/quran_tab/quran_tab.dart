@@ -1,364 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/home/models/sura_model.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_hor.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_ver.dart';
 
 class QuranTab extends StatefulWidget {
-  const QuranTab({super.key});
+  QuranTab({super.key});
 
   @override
   State<QuranTab> createState() => _QuranTabState();
 }
 
 class _QuranTabState extends State<QuranTab> {
-  List<String> suraNameAr = [
-    "الفاتحه",
-    "البقرة",
-    "آل عمران",
-    "النساء",
-    "المائدة",
-    "الأنعام",
-    "الأعراف",
-    "الأنفال",
-    "التوبة",
-    "يونس",
-    "هود",
-    "يوسف",
-    "الرعد",
-    "إبراهيم",
-    "الحجر",
-    "النحل",
-    "الإسراء",
-    "الكهف",
-    "مريم",
-    "طه",
-    "الأنبياء",
-    "الحج",
-    "المؤمنون",
-    "النّور",
-    "الفرقان",
-    "الشعراء",
-    "النّمل",
-    "القصص",
-    "العنكبوت",
-    "الرّوم",
-    "لقمان",
-    "السجدة",
-    "الأحزاب",
-    "سبأ",
-    "فاطر",
-    "يس",
-    "الصافات",
-    "ص",
-    "الزمر",
-    "غافر",
-    "فصّلت",
-    "الشورى",
-    "الزخرف",
-    "الدّخان",
-    "الجاثية",
-    "الأحقاف",
-    "محمد",
-    "الفتح",
-    "الحجرات",
-    "ق",
-    "الذاريات",
-    "الطور",
-    "النجم",
-    "القمر",
-    "الرحمن",
-    "الواقعة",
-    "الحديد",
-    "المجادلة",
-    "الحشر",
-    "الممتحنة",
-    "الصف",
-    "الجمعة",
-    "المنافقون",
-    "التغابن",
-    "الطلاق",
-    "التحريم",
-    "الملك",
-    "القلم",
-    "الحاقة",
-    "المعارج",
-    "نوح",
-    "الجن",
-    "المزّمّل",
-    "المدّثر",
-    "القيامة",
-    "الإنسان",
-    "المرسلات",
-    "النبأ",
-    "النازعات",
-    "عبس",
-    "التكوير",
-    "الإنفطار",
-    "المطفّفين",
-    "الإنشقاق",
-    "البروج",
-    "الطارق",
-    "الأعلى",
-    "الغاشية",
-    "الفجر",
-    "البلد",
-    "الشمس",
-    "الليل",
-    "الضحى",
-    "الشرح",
-    "التين",
-    "العلق",
-    "القدر",
-    "البينة",
-    "الزلزلة",
-    "العاديات",
-    "القارعة",
-    "التكاثر",
-    "العصر",
-    "الهمزة",
-    "الفيل",
-    "قريش",
-    "الماعون",
-    "الكوثر",
-    "الكافرون",
-    "النصر",
-    "المسد",
-    "الإخلاص",
-    "الفلق",
-    "الناس"
-  ];
-  List<String> suraNameEng = [
-    "Al-Fatiha",
-    "Al-Baqarah",
-    "Aal-E-Imran",
-    "An-Nisa'",
-    "Al-Ma'idah",
-    "Al-An'am",
-    "Al-A'raf",
-    "Al-Anfal",
-    "At-Tawbah",
-    "Yunus",
-    "Hud",
-    "Yusuf",
-    "Ar-Ra'd",
-    "Ibrahim",
-    "Al-Hijr",
-    "An-Nahl",
-    "Al-Isra",
-    "Al-Kahf",
-    "Maryam",
-    "Ta-Ha",
-    "Al-Anbiya",
-    "Al-Hajj",
-    "Al-Mu'minun",
-    "An-Nur",
-    "Al-Furqan",
-    "Ash-Shu'ara",
-    "An-Naml",
-    "Al-Qasas",
-    "Al-Ankabut",
-    "Ar-Rum",
-    "Luqman",
-    "As-Sajda",
-    "Al-Ahzab",
-    "Saba",
-    "Fatir",
-    "Ya-Sin",
-    "As-Saffat",
-    "Sad",
-    "Az-Zumar",
-    "Ghafir",
-    "Fussilat",
-    "Ash-Shura",
-    "Az-Zukhruf",
-    "Ad-Dukhan",
-    "Al-Jathiya",
-    "Al-Ahqaf",
-    "Muhammad",
-    "Al-Fath",
-    "Al-Hujurat",
-    "Qaf",
-    "Adh-Dhariyat",
-    "At-Tur",
-    "An-Najm",
-    "Al-Qamar",
-    "Ar-Rahman",
-    "Al-Waqi'a",
-    "Al-Hadid",
-    "Al-Mujadila",
-    "Al-Hashr",
-    "Al-Mumtahina",
-    "As-Saff",
-    "Al-Jumu'a",
-    "Al-Munafiqun",
-    "At-Taghabun",
-    "At-Talaq",
-    "At-Tahrim",
-    "Al-Mulk",
-    "Al-Qalam",
-    "Al-Haqqah",
-    "Al-Ma'arij",
-    "Nuh",
-    "Al-Jinn",
-    "Al-Muzzammil",
-    "Al-Muddathir",
-    "Al-Qiyamah",
-    "Al-Insan",
-    "Al-Mursalat",
-    "An-Naba'",
-    "An-Nazi'at",
-    "Abasa",
-    "At-Takwir",
-    "Al-Infitar",
-    "Al-Mutaffifin",
-    "Al-Inshiqaq",
-    "Al-Buruj",
-    "At-Tariq",
-    "Al-A'la",
-    "Al-Ghashiyah",
-    "Al-Fajr",
-    "Al-Balad",
-    "Ash-Shams",
-    "Al-Lail",
-    "Ad-Duha",
-    "Ash-Sharh",
-    "At-Tin",
-    "Al-Alaq",
-    "Al-Qadr",
-    "Al-Bayyina",
-    "Az-Zalzalah",
-    "Al-Adiyat",
-    "Al-Qari'a",
-    "At-Takathur",
-    "Al-Asr",
-    "Al-Humazah",
-    "Al-Fil",
-    "Quraysh",
-    "Al-Ma'un",
-    "Al-Kawthar",
-    "Al-Kafirun",
-    "An-Nasr",
-    "Al-Masad",
-    "Al-Ikhlas",
-    "Al-Falaq",
-    "An-Nas"
-  ];
-  List<String> verses = [
-    '7',
-    '286',
-    '200',
-    '176',
-    '120',
-    '165',
-    '206',
-    '75',
-    '129',
-    '109',
-    '123',
-    '111',
-    '43',
-    '52',
-    '99',
-    '128',
-    '111',
-    '110',
-    '98',
-    '135',
-    '112',
-    '78',
-    '118',
-    '64',
-    '77',
-    '227',
-    '93',
-    '88',
-    '69',
-    '60',
-    '34',
-    '30',
-    '73',
-    '54',
-    '45',
-    '83',
-    '182',
-    '88',
-    '75',
-    '85',
-    '54',
-    '53',
-    '89',
-    '59',
-    '37',
-    '35',
-    '38',
-    '29',
-    '18',
-    '45',
-    '60',
-    '49',
-    '62',
-    '55',
-    '78',
-    '96',
-    '29',
-    '22',
-    '24',
-    '13',
-    '14',
-    '11',
-    '11',
-    '18',
-    '12',
-    '12',
-    '30',
-    '52',
-    '52',
-    '44',
-    '28',
-    '28',
-    '20',
-    '56',
-    '40',
-    '31',
-    '50',
-    '40',
-    '46',
-    '42',
-    '29',
-    '19',
-    '36',
-    '25',
-    '22',
-    '17',
-    '19',
-    '26',
-    '30',
-    '20',
-    '15',
-    '21',
-    '11',
-    '8',
-    '5',
-    '19',
-    '5',
-    '8',
-    '8',
-    '11',
-    '11',
-    '8',
-    '3',
-    '9',
-    '5',
-    '4',
-    '6',
-    '3',
-    '6',
-    '3',
-    '5',
-    '4',
-    '5',
-    '6'
-  ];
+  void initState() {
+    super.initState();
+    searchController.addListener(onSearch);
+  }
+
+  var searchController = TextEditingController();
+
+  onSearch() {
+    SuraModel.searchReaslt.clear();
+    String text = searchController.text;
+    if (text.isEmpty) {
+      for (String data in SuraModel.suraNameEng) {
+        if (data.toLowerCase().contains(text.toLowerCase())) {
+          SuraModel.searchReaslt.add(data);
+        }
+      }
+    }
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -377,101 +49,133 @@ class _QuranTabState extends State<QuranTab> {
               width: 291,
               height: 170,
             ),
-            TextField(
-              cursorColor: Colors.white,
-              style: GoogleFonts.elMessiri(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFFEFFE8),
-              ),
-              decoration: InputDecoration(
-                labelText: "Sura Name",
-                labelStyle: GoogleFonts.elMessiri(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFFFEFFE8),
-                ),
-                prefixIcon: const ImageIcon(
-                  AssetImage("assets/images/ic_pre_search.png"),
-                  color: Color(0xFFE2BE7F),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFE2BE7F),
-                  ),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFE2BE7F),
-                  ),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10),
-                  borderSide: const BorderSide(
-                    color: Color(0xFFE2BE7F),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              "Most Recently",
-              style: GoogleFonts.elMessiri(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFFEFFE8),
-              ),
-            ),
-            const SizedBox(height: 10),
-             Container(
-              height: 150,
-              child: ListView.separated(
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (context, index) {
-                    return SuraItemHor(
-                      nameAr: suraNameAr[index],
-                      nameEng: suraNameEng[index],
-                      verse: verses[index],
-                    );
-                  },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 10),
-                  itemCount: suraNameAr.length),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              "Suras List",
-              style: GoogleFonts.elMessiri(
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFFEFFE8),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Expanded(
-              child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  itemBuilder: (context, index) {
-                    return SuraItemVer(
-                      nameAr: suraNameAr[index],
-                      nameEng: suraNameEng[index],
-                      index: index + 1,
-                      verse: verses[index],
-                    );
-                  },
-                  separatorBuilder: (context, index) => const Divider(
-                        color: Color(0xFFFFFFFF),
-                        thickness: 2,
-                        indent: 43,
-                        endIndent: 43,
-                      ),
-                  itemCount: suraNameAr.length),
-            ),
+            _searchItem(),
+            if (SuraModel.searchReaslt.isEmpty &&
+                searchController.text.isEmpty) ...[_suraItemHorizental()],
+
+            // SuraModel.searchReaslt.isNotEmpty && searchController.text.isNotEmpty
+            //     ? SizedBox()
+            //     : _suraItemHorizental(),
+            // _suraItemVertical(),
           ],
         ),
       ),
+    );
+  }
+
+  Widget _suraItemVertical() {
+    return Expanded(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            "Suras List",
+            style: GoogleFonts.elMessiri(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: const Color(0xFFFEFFE8),
+            ),
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView.separated(
+                scrollDirection: Axis.vertical,
+                itemBuilder: (context, index) {
+                  return SuraItemVer(
+                    model: searchController.text.isNotEmpty
+                        ? SuraModel.getSelectedSuraModel(index)
+                        : SuraModel.getSuraModel(index),
+                  );
+                },
+                separatorBuilder: (context, index) => const Divider(
+                      color: Color(0xFFFFFFFF),
+                      thickness: 2,
+                      indent: 43,
+                      endIndent: 43,
+                    ),
+                itemCount: searchController.text.isNotEmpty
+                    ? SuraModel.length
+                    : SuraModel.length),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _suraItemHorizental() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          "Most Recently",
+          style: GoogleFonts.elMessiri(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFFFEFFE8),
+          ),
+        ),
+        const SizedBox(height: 10),
+        Container(
+          height: 150,
+          child: ListView.separated(
+              scrollDirection: Axis.horizontal,
+              itemBuilder: (context, index) {
+                return SuraItemHor(
+                  model: SuraModel.getSuraModel(index),
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(width: 10),
+              itemCount: SuraModel.length),
+        ),
+        const SizedBox(height: 10),
+      ],
+    );
+  }
+
+  Widget _searchItem() {
+    return Column(
+      children: [
+        TextField(
+          controller: searchController,
+          cursorColor: Colors.white,
+          style: GoogleFonts.elMessiri(
+            fontSize: 16,
+            fontWeight: FontWeight.w700,
+            color: const Color(0xFFFEFFE8),
+          ),
+          decoration: InputDecoration(
+            labelText: "Sura Name",
+            labelStyle: GoogleFonts.elMessiri(
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
+              color: const Color(0xFFFEFFE8),
+            ),
+            prefixIcon: const ImageIcon(
+              AssetImage("assets/images/ic_pre_search.png"),
+              color: Color(0xFFE2BE7F),
+            ),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: Color(0xFFE2BE7F),
+              ),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: Color(0xFFE2BE7F),
+              ),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(10),
+              borderSide: const BorderSide(
+                color: Color(0xFFE2BE7F),
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 20),
+      ],
     );
   }
 }
