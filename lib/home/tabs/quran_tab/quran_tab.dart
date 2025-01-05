@@ -3,9 +3,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_hor.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_ver.dart';
 
-class QuranTab extends StatelessWidget {
-  QuranTab({super.key});
+class QuranTab extends StatefulWidget {
+  const QuranTab({super.key});
 
+  @override
+  State<QuranTab> createState() => _QuranTabState();
+}
+
+class _QuranTabState extends State<QuranTab> {
   List<String> suraNameAr = [
     "الفاتحه",
     "البقرة",
@@ -420,15 +425,15 @@ class QuranTab extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 10),
-            Container(
+             Container(
               height: 150,
               child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (context, index) {
                     return SuraItemHor(
-                      nameAr: '${suraNameAr[index]}',
-                      nameEng: '${suraNameEng[index]}',
-                      verse: '${verses[index]}',
+                      nameAr: suraNameAr[index],
+                      nameEng: suraNameEng[index],
+                      verse: verses[index],
                     );
                   },
                   separatorBuilder: (context, index) =>
@@ -450,10 +455,10 @@ class QuranTab extends StatelessWidget {
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     return SuraItemVer(
-                      nameAr: '${suraNameAr[index]}',
-                      nameEng: '${suraNameEng[index]}',
+                      nameAr: suraNameAr[index],
+                      nameEng: suraNameEng[index],
                       index: index + 1,
-                      verse: '${verses[index]}',
+                      verse: verses[index],
                     );
                   },
                   separatorBuilder: (context, index) => const Divider(
