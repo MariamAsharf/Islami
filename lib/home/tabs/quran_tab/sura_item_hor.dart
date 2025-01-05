@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/home/models/sura_model.dart';
 
 class SuraItemHor extends StatelessWidget {
-  SuraItemHor(
-      {super.key,
-      required this.nameAr,
-      required this.nameEng,
-      required this.verse});
-
-  String nameAr;
-  String nameEng;
-  String verse;
+  SuraItemHor({
+    super.key,
+   required this.model
+  });
+SuraModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +25,7 @@ class SuraItemHor extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                nameEng,
+                model.nameEng,
                 style: GoogleFonts.elMessiri(
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
@@ -37,7 +34,7 @@ class SuraItemHor extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                nameAr,
+                model.nameAr,
                 style: GoogleFonts.elMessiri(
                   fontWeight: FontWeight.w700,
                   fontSize: 24,
@@ -46,7 +43,7 @@ class SuraItemHor extends StatelessWidget {
               ),
               const SizedBox(height: 12),
               Text(
-                "$verse Verses",
+                "${model.verse} Verses",
                 style: GoogleFonts.elMessiri(
                   fontWeight: FontWeight.w700,
                   fontSize: 14,
@@ -55,7 +52,7 @@ class SuraItemHor extends StatelessWidget {
               ),
             ],
           ),
-        SizedBox(width: 5),
+          SizedBox(width: 5),
           const Image(
             image: AssetImage("assets/images/sura_item.png"),
           ),
