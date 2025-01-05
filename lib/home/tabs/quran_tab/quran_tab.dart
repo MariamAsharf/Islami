@@ -22,7 +22,7 @@ class _QuranTabState extends State<QuranTab> {
   onSearch() {
     SuraModel.searchReaslt.clear();
     String text = searchController.text;
-    if (text.isEmpty) {
+    if (text.isNotEmpty) {
       for (String data in SuraModel.suraNameEng) {
         if (data.toLowerCase().contains(text.toLowerCase())) {
           SuraModel.searchReaslt.add(data);
@@ -56,7 +56,8 @@ class _QuranTabState extends State<QuranTab> {
             // SuraModel.searchReaslt.isNotEmpty && searchController.text.isNotEmpty
             //     ? SizedBox()
             //     : _suraItemHorizental(),
-            // _suraItemVertical(),
+
+            _suraItemVertical(),
           ],
         ),
       ),
@@ -94,7 +95,7 @@ class _QuranTabState extends State<QuranTab> {
                       endIndent: 43,
                     ),
                 itemCount: searchController.text.isNotEmpty
-                    ? SuraModel.length
+                    ? SuraModel.searchReaslt.length
                     : SuraModel.length),
           ),
         ],
