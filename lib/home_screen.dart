@@ -29,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         child: Scaffold(
-          backgroundColor: Color(0x99202020),
+          backgroundColor: const Color(0x99202020),
           body: tabs[currentindex],
           bottomNavigationBar: BottomNavigationBar(
             backgroundColor: const Color(0xFFE2BE7F),
@@ -75,10 +75,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> tabs = [
     QuranTab(),
-    AhadethTab(),
-    SebhaTab(),
-    RadioTab(),
-    DatesTab()
+    const AhadethTab(),
+    const SebhaTab(),
+    const RadioTab(),
+    const DatesTab()
   ];
 
   String getBackgroundImageName() {
