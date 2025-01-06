@@ -21,7 +21,9 @@ class SuraItemVer extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 "${model.index}",
-                style:Theme.of(context).textTheme.titleMedium
+                style:  Theme.of(context).textTheme.titleMedium?.copyWith(
+                  color: const Color(0xFFFEFFE8),
+                ),
               ),
             ),
           ],
@@ -32,18 +34,24 @@ class SuraItemVer extends StatelessWidget {
           children: [
             Text(
               model.nameEng,
-              style: Theme.of(context).textTheme.titleMedium
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: const Color(0xFFFEFFE8),
+                  ),
             ),
             Text(
               "${model.verse} Verses",
-              style: Theme.of(context).textTheme.titleSmall
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: const Color(0xFFFEFFE8),
+                  ),
             ),
           ],
         ),
         const Spacer(),
         Text(
           model.nameAr,
-          style:Theme.of(context).textTheme.titleMedium
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: const Color(0xFFFEFFE8),
+              ),
         ),
       ],
     );

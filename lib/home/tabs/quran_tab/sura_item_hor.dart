@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_app/home/models/sura_model.dart';
+import 'package:islami_app/my_theme/my_theme.dart';
 
 class SuraItemHor extends StatelessWidget {
-  SuraItemHor({
-    super.key,
-   required this.model
-  });
-SuraModel model;
+  SuraItemHor({super.key, required this.model});
+
+  SuraModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +14,7 @@ SuraModel model;
       height: 150,
       padding: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFFE2BE7F),
+        color: MYTheme.primaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -26,17 +25,25 @@ SuraModel model;
             children: [
               Text(
                 model.nameEng,
-                style: Theme.of(context).textTheme.titleLarge
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: MYTheme.secondryColor,
+                    ),
               ),
               const SizedBox(height: 12),
               Text(
                 model.nameAr,
-                style: Theme.of(context).textTheme.titleLarge
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(color: MYTheme.secondryColor),
               ),
               const SizedBox(height: 12),
               Text(
                 "${model.verse} Verses",
-                style: Theme.of(context).textTheme.titleSmall
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(color: MYTheme.secondryColor),
               ),
             ],
           ),

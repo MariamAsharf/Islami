@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class MYtheme {
+class MYTheme {
   static const Color primaryColor = Color(0xFFE2BE7F);
   static const Color secondryColor = Color(0xFF202020);
   static const Color thirdColor = Color(0xFFFFFFFF);
 
   static ThemeData lightTheme = ThemeData(
-    scaffoldBackgroundColor: Color(0x99202020),
+    scaffoldBackgroundColor: const Color(0x99202020),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.elMessiri(
           fontSize: 24.0,

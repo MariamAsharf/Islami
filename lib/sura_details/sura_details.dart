@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_app/home/models/sura_model.dart';
+import 'package:islami_app/my_theme/my_theme.dart';
 
 class SuraDetailsScreen extends StatefulWidget {
   static const String routeName = "SuraDetailsScreen";
@@ -25,10 +26,8 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
     }
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          model.nameEng,
-          style: Theme.of(context).textTheme.titleMedium
-        ),
+        title:
+            Text(model.nameEng, style: Theme.of(context).textTheme.titleMedium),
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -41,10 +40,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
           Column(
             children: [
               SizedBox(height: 24),
-              Text(
-                model.nameAr,
-                style: Theme.of(context).textTheme.titleLarge
-              ),
+              Text(model.nameAr, style: Theme.of(context).textTheme.titleLarge),
               SizedBox(height: 56),
               Expanded(
                 child: Padding(
@@ -58,7 +54,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                             color: Colors.transparent,
                             border: Border.fromBorderSide(
                               BorderSide(
-                                color: Theme.of(context).primaryColor,
+                                color: MYTheme.primaryColor,
                               ),
                             ),
                           ),
@@ -71,12 +67,18 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                                 TextSpan(
                                   children: [
                                     TextSpan(
-                                      text: "${verses[index]}",
-                                      style: Theme.of(context).textTheme.titleMedium
-                                    ),
+                                        text: "${verses[index]}",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .titleMedium),
                                     TextSpan(
                                       text: "(${index + 1})",
-                                      style: Theme.of(context).textTheme.titleSmall
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .titleSmall
+                                          ?.copyWith(
+                                            color: MYTheme.thirdColor,
+                                          ),
                                     ),
                                   ],
                                 ),

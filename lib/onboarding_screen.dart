@@ -4,6 +4,8 @@ import 'package:introduction_screen/introduction_screen.dart';
 import 'package:islami_app/cache/cache_helper.dart';
 import 'package:islami_app/home_screen.dart';
 
+import 'my_theme/my_theme.dart';
+
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
 
@@ -23,14 +25,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     var pageDecoration = PageDecoration(
       titleTextStyle: GoogleFonts.elMessiri(
           fontSize: 24.0,
-          color: Theme.of(context).primaryColor,
+          color: MYTheme.primaryColor,
           fontWeight: FontWeight.w700),
       bodyTextStyle: GoogleFonts.elMessiri(
           fontSize: 20.0,
-          color: Theme.of(context).primaryColor,
+          color: MYTheme.primaryColor,
           fontWeight: FontWeight.w700),
       bodyPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: const Color(0xFF202020),
+      pageColor: MYTheme.secondryColor,
       imagePadding: EdgeInsets.zero,
       imageFlex: 5,
     );

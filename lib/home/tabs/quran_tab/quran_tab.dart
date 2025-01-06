@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_app/home/models/sura_model.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_hor.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_ver.dart';
+import 'package:islami_app/my_theme/my_theme.dart';
 import 'package:islami_app/sura_details/sura_details.dart';
 
 class QuranTab extends StatefulWidget {
@@ -70,7 +71,12 @@ class _QuranTabState extends State<QuranTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text("Suras List", style: Theme.of(context).textTheme.titleSmall),
+          Text(
+            "Suras List",
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: MYTheme.thirdColor,
+                ),
+          ),
           const SizedBox(height: 10),
           Expanded(
             child: ListView.separated(
@@ -105,7 +111,12 @@ class _QuranTabState extends State<QuranTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text("Most Recently", style: Theme.of(context).textTheme.titleSmall),
+        Text(
+          "Most Recently",
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: MYTheme.thirdColor,
+              ),
+        ),
         const SizedBox(height: 10),
         Container(
           height: 150,
@@ -129,31 +140,36 @@ class _QuranTabState extends State<QuranTab> {
       children: [
         TextField(
           controller: searchController,
-          cursorColor: Colors.white,
-          style: Theme.of(context).textTheme.titleSmall,
+          cursorColor: MYTheme.thirdColor,
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: MYTheme.thirdColor,
+              ),
           decoration: InputDecoration(
             labelText: "Sura Name",
-            labelStyle: Theme.of(context).textTheme.titleSmall,
-            prefixIcon:  ImageIcon(
+            labelStyle: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(color: MYTheme.thirdColor),
+            prefixIcon: ImageIcon(
               AssetImage("assets/images/ic_pre_search.png"),
-              color: Theme.of(context).primaryColor,
+              color: MYTheme.primaryColor,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(
-                color: Theme.of(context).primaryColor,
+              borderSide: BorderSide(
+                color: MYTheme.primaryColor,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(
-                color: Theme.of(context).primaryColor,
+              borderSide: BorderSide(
+                color: MYTheme.primaryColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide:  BorderSide(
-                color: Theme.of(context).primaryColor,
+              borderSide: BorderSide(
+                color: MYTheme.primaryColor,
               ),
             ),
           ),

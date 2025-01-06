@@ -19,8 +19,8 @@ class IslamiApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: MYtheme.lightTheme,
-      darkTheme: MYtheme.darkTheme,
+      theme: MYTheme.lightTheme,
+      darkTheme: MYTheme.darkTheme,
       themeMode: ThemeMode.light,
       debugShowCheckedModeBanner: false,
       initialRoute: CacheHelper.getEligibility() == true

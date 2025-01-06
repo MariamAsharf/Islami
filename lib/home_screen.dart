@@ -29,6 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         child: Scaffold(
+
           body: tabs[currentindex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentindex,
@@ -94,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ? Container(
             padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 20),
             decoration: BoxDecoration(
-              color: Theme.of(context).scaffoldBackgroundColor,
+              color: const Color(0x99202020),
               borderRadius: BorderRadius.circular(66),
             ),
             child: ImageIcon(
