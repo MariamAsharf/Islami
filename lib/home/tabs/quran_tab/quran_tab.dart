@@ -70,14 +70,7 @@ class _QuranTabState extends State<QuranTab> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            "Suras List",
-            style: GoogleFonts.elMessiri(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFFFEFFE8),
-            ),
-          ),
+          Text("Suras List", style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 10),
           Expanded(
             child: ListView.separated(
@@ -98,12 +91,7 @@ class _QuranTabState extends State<QuranTab> {
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => const Divider(
-                      color: Color(0xFFFFFFFF),
-                      thickness: 2,
-                      indent: 43,
-                      endIndent: 43,
-                    ),
+                separatorBuilder: (context, index) => const Divider(),
                 itemCount: searchController.text.isNotEmpty
                     ? SuraModel.searchReaslt.length
                     : SuraModel.length),
@@ -117,14 +105,7 @@ class _QuranTabState extends State<QuranTab> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          "Most Recently",
-          style: GoogleFonts.elMessiri(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFFFEFFE8),
-          ),
-        ),
+        Text("Most Recently", style: Theme.of(context).textTheme.titleSmall),
         const SizedBox(height: 10),
         Container(
           height: 150,
@@ -149,38 +130,30 @@ class _QuranTabState extends State<QuranTab> {
         TextField(
           controller: searchController,
           cursorColor: Colors.white,
-          style: GoogleFonts.elMessiri(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFFFEFFE8),
-          ),
+          style: Theme.of(context).textTheme.titleSmall,
           decoration: InputDecoration(
             labelText: "Sura Name",
-            labelStyle: GoogleFonts.elMessiri(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFFFEFFE8),
-            ),
-            prefixIcon: const ImageIcon(
+            labelStyle: Theme.of(context).textTheme.titleSmall,
+            prefixIcon:  ImageIcon(
               AssetImage("assets/images/ic_pre_search.png"),
-              color: Color(0xFFE2BE7F),
+              color: Theme.of(context).primaryColor,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFFE2BE7F),
+              borderSide:  BorderSide(
+                color: Theme.of(context).primaryColor,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFFE2BE7F),
+              borderSide:  BorderSide(
+                color: Theme.of(context).primaryColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFFE2BE7F),
+              borderSide:  BorderSide(
+                color: Theme.of(context).primaryColor,
               ),
             ),
           ),

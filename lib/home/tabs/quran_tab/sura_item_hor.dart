@@ -26,29 +26,17 @@ SuraModel model;
             children: [
               Text(
                 model.nameEng,
-                style: GoogleFonts.elMessiri(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                  color: const Color(0xFF202020),
-                ),
+                style: Theme.of(context).textTheme.titleLarge
               ),
               const SizedBox(height: 12),
               Text(
                 model.nameAr,
-                style: GoogleFonts.elMessiri(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                  color: const Color(0xFF202020),
-                ),
+                style: Theme.of(context).textTheme.titleLarge
               ),
               const SizedBox(height: 12),
               Text(
                 "${model.verse} Verses",
-                style: GoogleFonts.elMessiri(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  color: const Color(0xFF202020),
-                ),
+                style: Theme.of(context).textTheme.titleSmall
               ),
             ],
           ),

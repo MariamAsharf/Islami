@@ -24,20 +24,10 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
       loadSuraFile(model.index + 1);
     }
     return Scaffold(
-      backgroundColor: Color(0xFF202020),
       appBar: AppBar(
-        iconTheme: IconThemeData(
-          color: Color(0xFFE2BE7F),
-        ),
-        centerTitle: true,
-        backgroundColor: Color(0xFF202020),
         title: Text(
           model.nameEng,
-          style: GoogleFonts.elMessiri(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: Color(0xFFE2BE7F),
-          ),
+          style: Theme.of(context).textTheme.titleMedium
         ),
       ),
       body: Stack(
@@ -53,11 +43,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
               SizedBox(height: 24),
               Text(
                 model.nameAr,
-                style: GoogleFonts.elMessiri(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                  color: Color(0xFFE2BE7F),
-                ),
+                style: Theme.of(context).textTheme.titleLarge
               ),
               SizedBox(height: 56),
               Expanded(
@@ -72,7 +58,7 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                             color: Colors.transparent,
                             border: Border.fromBorderSide(
                               BorderSide(
-                                color: Color(0xFFE2BE7F),
+                                color: Theme.of(context).primaryColor,
                               ),
                             ),
                           ),
@@ -86,19 +72,11 @@ class _SuraDetailsScreenState extends State<SuraDetailsScreen> {
                                   children: [
                                     TextSpan(
                                       text: "${verses[index]}",
-                                      style: GoogleFonts.elMessiri(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xFFE2BE7F),
-                                      ),
+                                      style: Theme.of(context).textTheme.titleMedium
                                     ),
                                     TextSpan(
                                       text: "(${index + 1})",
-                                      style: GoogleFonts.elMessiri(
-                                        fontSize: 16,
-                                        fontWeight: FontWeight.w700,
-                                        color: Color(0xFFE2BE7F),
-                                      ),
+                                      style: Theme.of(context).textTheme.titleSmall
                                     ),
                                   ],
                                 ),
