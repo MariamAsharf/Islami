@@ -21,9 +21,9 @@ class SuraItemVer extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 "${model.index}",
-                style:  Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: const Color(0xFFFEFFE8),
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: const Color(0xFFFEFFE8),
+                    ),
               ),
             ),
           ],

@@ -29,7 +29,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         child: Scaffold(
-
           body: tabs[currentindex],
           bottomNavigationBar: BottomNavigationBar(
             currentIndex: currentindex,
@@ -67,7 +66,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> tabs = [
     QuranTab(),
-    const AhadethTab(),
+    AhadethTab(),
     const SebhaTab(),
     const RadioTab(),
     const DatesTab()

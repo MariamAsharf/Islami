@@ -47,20 +47,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         CacheHelper.saveEligibility();
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       },
-      next: Text(
-        "Next",
-        style:Theme.of(context).textTheme.titleSmall
-      ),
+      next: Text("Next", style: Theme.of(context).textTheme.titleSmall),
       showNextButton: true,
-      back: Text(
-        "Back",
-        style: Theme.of(context).textTheme.titleSmall
-      ),
+      back: Text("Back", style: Theme.of(context).textTheme.titleSmall),
       showBackButton: true,
       dotsFlex: 2,
-      dotsDecorator:  DotsDecorator(
+      dotsDecorator: DotsDecorator(
         color: Color(0xFF707070),
-        activeColor:Theme.of(context).primaryColor,
+        activeColor: MYTheme.primaryColor,
         size: Size(7, 7),
       ),
       pages: [

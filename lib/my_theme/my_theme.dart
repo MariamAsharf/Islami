@@ -10,21 +10,15 @@ class MYTheme {
     scaffoldBackgroundColor: const Color(0x99202020),
     textTheme: TextTheme(
       titleLarge: GoogleFonts.elMessiri(
-          fontSize: 24.0,
-          color: primaryColor,
-          fontWeight: FontWeight.w700),
+          fontSize: 24.0, color: primaryColor, fontWeight: FontWeight.w700),
       titleMedium: GoogleFonts.elMessiri(
-          fontSize: 20.0,
-          color: primaryColor,
-          fontWeight: FontWeight.w700),
+          fontSize: 20.0, color: primaryColor, fontWeight: FontWeight.w700),
       titleSmall: GoogleFonts.elMessiri(
-          fontSize: 16.0,
-          color: primaryColor,
-          fontWeight: FontWeight.w700),
+          fontSize: 16.0, color: primaryColor, fontWeight: FontWeight.w700),
     ),
     appBarTheme: AppBarTheme(
       iconTheme: IconThemeData(
-        color:primaryColor,
+        color: primaryColor,
       ),
       centerTitle: true,
       backgroundColor: Color(0xFF202020),
