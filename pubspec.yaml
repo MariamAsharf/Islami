@@ -16,6 +16,7 @@ dependencies:
   introduction_screen: ^3.1.14
   google_fonts: ^6.2.1
   shared_preferences: ^2.3.5
+  carousel_slider: ^5.0.0
 
 dev_dependencies:
   flutter_test:
@@ -28,5 +29,4 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/sura_files/
-    - assets/ahadith_files/
+    - assets/files/

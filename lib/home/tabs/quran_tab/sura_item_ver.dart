@@ -21,11 +21,9 @@ class SuraItemVer extends StatelessWidget {
               padding: const EdgeInsets.only(top: 4),
               child: Text(
                 "${model.index}",
-                style: GoogleFonts.elMessiri(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFFFEFFE8),
-                ),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: const Color(0xFFFEFFE8),
+                    ),
               ),
             ),
           ],
@@ -36,30 +34,24 @@ class SuraItemVer extends StatelessWidget {
           children: [
             Text(
               model.nameEng,
-              style: GoogleFonts.elMessiri(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFFEFFE8),
-              ),
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: const Color(0xFFFEFFE8),
+                  ),
             ),
             Text(
               "${model.verse} Verses",
-              style: GoogleFonts.elMessiri(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFFEFFE8),
-              ),
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: const Color(0xFFFEFFE8),
+                  ),
             ),
           ],
         ),
         const Spacer(),
         Text(
           model.nameAr,
-          style: GoogleFonts.elMessiri(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFFFEFFE8),
-          ),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: const Color(0xFFFEFFE8),
+              ),
         ),
       ],
     );

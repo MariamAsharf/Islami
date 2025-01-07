@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_app/home/models/sura_model.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_hor.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_ver.dart';
+import 'package:islami_app/my_theme/my_theme.dart';
 import 'package:islami_app/sura_details/sura_details.dart';
 
 class QuranTab extends StatefulWidget {
@@ -72,11 +73,9 @@ class _QuranTabState extends State<QuranTab> {
         children: [
           Text(
             "Suras List",
-            style: GoogleFonts.elMessiri(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFFFEFFE8),
-            ),
+            style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                  color: MYTheme.thirdColor,
+                ),
           ),
           const SizedBox(height: 10),
           Expanded(
@@ -98,12 +97,7 @@ class _QuranTabState extends State<QuranTab> {
                     ),
                   );
                 },
-                separatorBuilder: (context, index) => const Divider(
-                      color: Color(0xFFFFFFFF),
-                      thickness: 2,
-                      indent: 43,
-                      endIndent: 43,
-                    ),
+                separatorBuilder: (context, index) => const Divider(),
                 itemCount: searchController.text.isNotEmpty
                     ? SuraModel.searchReaslt.length
                     : SuraModel.length),
@@ -119,11 +113,9 @@ class _QuranTabState extends State<QuranTab> {
       children: [
         Text(
           "Most Recently",
-          style: GoogleFonts.elMessiri(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFFFEFFE8),
-          ),
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: MYTheme.thirdColor,
+              ),
         ),
         const SizedBox(height: 10),
         Container(
@@ -148,39 +140,36 @@ class _QuranTabState extends State<QuranTab> {
       children: [
         TextField(
           controller: searchController,
-          cursorColor: Colors.white,
-          style: GoogleFonts.elMessiri(
-            fontSize: 16,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFFFEFFE8),
-          ),
+          cursorColor: MYTheme.thirdColor,
+          style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                color: MYTheme.thirdColor,
+              ),
           decoration: InputDecoration(
             labelText: "Sura Name",
-            labelStyle: GoogleFonts.elMessiri(
-              fontSize: 16,
-              fontWeight: FontWeight.w700,
-              color: const Color(0xFFFEFFE8),
-            ),
-            prefixIcon: const ImageIcon(
+            labelStyle: Theme.of(context)
+                .textTheme
+                .titleSmall
+                ?.copyWith(color: MYTheme.thirdColor),
+            prefixIcon: ImageIcon(
               AssetImage("assets/images/ic_pre_search.png"),
-              color: Color(0xFFE2BE7F),
+              color: MYTheme.primaryColor,
             ),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFFE2BE7F),
+              borderSide: BorderSide(
+                color: MYTheme.primaryColor,
               ),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFFE2BE7F),
+              borderSide: BorderSide(
+                color: MYTheme.primaryColor,
               ),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(10),
-              borderSide: const BorderSide(
-                color: Color(0xFFE2BE7F),
+              borderSide: BorderSide(
+                color: MYTheme.primaryColor,
               ),
             ),
           ),
