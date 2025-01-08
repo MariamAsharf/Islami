@@ -30,7 +30,7 @@ class RadioTab extends StatelessWidget {
             inactiveBgColor: Color(0xB3202020),
             inactiveFgColor: MYTheme.thirdColor,
             totalSwitches: 2,
-            labels: ['Radio','Reciters'],
+            labels: ['Radio', 'Reciters'],
             onToggle: (index) {
               print('switched to: $index');
             },
@@ -40,61 +40,61 @@ class RadioTab extends StatelessWidget {
             child: ListView.separated(
                 scrollDirection: Axis.vertical,
                 itemBuilder: (context, index) {
-                  return Container(
-                    height: 133,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: MYTheme.primaryColor,
-                    ),
-                    child: Stack(
-                      alignment: Alignment.bottomCenter,
-                      children: [
-                        Image(
+                  return Stack(
+                    children: [
+                      Container(
+                        alignment: Alignment.bottomCenter,
+                        height: 133,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          color: MYTheme.primaryColor,
+                        ),
+                        child: Image(
                           image: AssetImage("assets/images/Mosque-02.png"),
                         ),
-                        Column(
-                          children: [
-                            SizedBox(height: 12),
-                            Text(
-                              "Radio Ibrahim Al-Akdar",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(color: MYTheme.secondryColor),
-                            ),
-                            SizedBox(height: 24),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: ImageIcon(
-                                    AssetImage("assets/images/Vector.png"),
-                                    color: MYTheme.secondryColor,
-                                  ),
+                      ),
+                      Column(
+                        children: [
+                          SizedBox(height: 12),
+                          Text(
+                            "Radio Ibrahim Al-Akdar",
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(color: MYTheme.secondryColor),
+                          ),
+                          SizedBox(height: 24),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              IconButton(
+                                onPressed: () {},
+                                icon: ImageIcon(
+                                  AssetImage("assets/images/Vector.png"),
+                                  color: MYTheme.secondryColor,
                                 ),
-                                SizedBox(width: 16),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: ImageIcon(
-                                    AssetImage("assets/images/Polygon 2.png"),
-                                    color: MYTheme.secondryColor,
-                                  ),
+                              ),
+                              SizedBox(width: 16),
+                              IconButton(
+                                onPressed: () {},
+                                icon: ImageIcon(
+                                  AssetImage("assets/images/Polygon 2.png"),
+                                  color: MYTheme.secondryColor,
                                 ),
-                                SizedBox(width: 16),
-                                IconButton(
-                                  onPressed: () {},
-                                  icon: ImageIcon(
-                                    AssetImage("assets/images/Volume High.png"),
-                                    color: MYTheme.secondryColor,
-                                  ),
+                              ),
+                              SizedBox(width: 16),
+                              IconButton(
+                                onPressed: () {},
+                                icon: ImageIcon(
+                                  AssetImage("assets/images/Volume High.png"),
+                                  color: MYTheme.secondryColor,
                                 ),
-                              ],
-                            )
-                          ],
-                        )
-                      ],
-                    ),
+                              ),
+                            ],
+                          )
+                        ],
+                      )
+                    ],
                   );
                 },
                 separatorBuilder: (context, index) => SizedBox(height: 8),
