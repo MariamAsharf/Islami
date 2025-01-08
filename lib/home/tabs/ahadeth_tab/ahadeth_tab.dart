@@ -29,16 +29,21 @@ class _AhadethTabState extends State<AhadethTab> {
         ),
         Expanded(
           child: CarouselSlider(
-            options: CarouselOptions(height: double.infinity,),
+            options: CarouselOptions(
+              height: double.infinity,
+              enlargeCenterPage: true,
+            ),
             items: ahadith.map((hadith) {
               return Builder(
                 builder: (BuildContext context) {
                   return GestureDetector(
-                    onTap: (){
-                      Navigator.pushNamed(context, HadithDetailsScreen.routeName,arguments: hadith);
+                    onTap: () {
+                      Navigator.pushNamed(
+                          context, HadithDetailsScreen.routeName,
+                          arguments: hadith);
                     },
                     child: Container(
-                      margin: EdgeInsets.symmetric(horizontal: 12),
+                      margin: EdgeInsets.symmetric(horizontal: 5),
                       child: Stack(
                         children: [
                           Image(
@@ -53,20 +58,22 @@ class _AhadethTabState extends State<AhadethTab> {
                               children: [
                                 SizedBox(height: 42),
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 22),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 22),
                                   child: Text(
                                     hadith.title,
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleLarge
-                                        ?.copyWith(color: MYTheme.secondryColor),
+                                        ?.copyWith(
+                                            color: MYTheme.secondryColor),
                                   ),
                                 ),
                                 SizedBox(height: 12),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(horizontal: 16),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16),
                                   child: Text(
                                     overflow: TextOverflow.ellipsis,
                                     maxLines: 14,
@@ -75,7 +82,8 @@ class _AhadethTabState extends State<AhadethTab> {
                                     style: Theme.of(context)
                                         .textTheme
                                         .titleSmall
-                                        ?.copyWith(color: MYTheme.secondryColor),
+                                        ?.copyWith(
+                                            color: MYTheme.secondryColor),
                                   ),
                                 ),
                               ],

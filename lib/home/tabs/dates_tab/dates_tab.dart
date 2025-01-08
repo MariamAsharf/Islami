@@ -32,34 +32,17 @@ class DatesTab extends StatelessWidget {
       "date": "PM",
     }
   ];
-  List<Map<String, String>> Azkars =[
-    {
-      "name":"Evening Azkar",
-      "image":"assets/images/Illustration.png"
-    },
-    {
-      "name":"Morning Azkar",
-      "image":"assets/images/Illustration-1.png"
-    },{
-      "name":"Pray Azkar",
-      "image":"assets/images/Illustration-2.png"
-    },{
-      "name":"Tasabeeh Azkar",
-      "image":"assets/images/Illustration-3.png"
-    },{
-      "name":"Sleep Azkar",
-      "image":"assets/images/Illustration-4.png"
-    },{
-      "name":"WakeUp Azkar",
-      "image":"assets/images/Illustration-5.png"
-    },{
-      "name":"Quran Doaa",
-      "image":"assets/images/Illustration-6.png"
-    },{
-      "name":"Rasols Doaa",
-      "image":"assets/images/Illustration-7.png"
-    },
+  List<Map<String, String>> Azkars = [
+    {"name": "Evening Azkar", "image": "assets/images/Illustration.png"},
+    {"name": "Morning Azkar", "image": "assets/images/Illustration-1.png"},
+    {"name": "Pray Azkar", "image": "assets/images/Illustration-2.png"},
+    {"name": "Tasabeeh Azkar", "image": "assets/images/Illustration-3.png"},
+    {"name": "Sleep Azkar", "image": "assets/images/Illustration-4.png"},
+    {"name": "WakeUp Azkar", "image": "assets/images/Illustration-5.png"},
+    {"name": "Quran Doaa", "image": "assets/images/Illustration-6.png"},
+    {"name": "Rasols Doaa", "image": "assets/images/Illustration-7.png"},
   ];
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -241,24 +224,27 @@ class DatesTab extends StatelessWidget {
                 itemCount: Azkars.length,
                 itemBuilder: (context, index) {
                   final azkar = Azkars[index];
-                  return Container(
-                    decoration: BoxDecoration(
-                        color: MYTheme.secondryColor,
-                        borderRadius: BorderRadius.circular(20),
-                        border: Border.all(color: MYTheme.primaryColor)),
-                    child: Column(
-                      children: [
-                        Image(
-                          image: AssetImage(azkar["image"]!),
-                        ),
-                        Text(
-                          azkar["name"]!,
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(color: MYTheme.thirdColor),
-                        ),
-                      ],
+                  return GestureDetector(
+                    onTap: () {},
+                    child: Container(
+                      decoration: BoxDecoration(
+                          color: MYTheme.secondryColor,
+                          borderRadius: BorderRadius.circular(20),
+                          border: Border.all(color: MYTheme.primaryColor)),
+                      child: Column(
+                        children: [
+                          Image(
+                            image: AssetImage(azkar["image"]!),
+                          ),
+                          Text(
+                            azkar["name"]!,
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(color: MYTheme.thirdColor),
+                          ),
+                        ],
+                      ),
                     ),
                   );
                 }),
