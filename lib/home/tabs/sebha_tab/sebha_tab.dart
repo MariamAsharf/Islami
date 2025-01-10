@@ -8,16 +8,45 @@ class SebhaTab extends StatefulWidget {
   State<SebhaTab> createState() => _SebhaTabState();
 }
 
-class _SebhaTabState extends State<SebhaTab> {
-  double turns = 0;
+class _SebhaTabState extends State<SebhaTab>
+    with SingleTickerProviderStateMixin {
+  int count = 1;
   int index = 0;
+  late AnimationController _controller;
   List<String> tasbeeh = [
     "سبحان الله",
     "الحمد لله",
     "لا اله الا الله",
     "الله اكبر",
-    "استغفر الله العظيم"
+    "استغفر الله العظيم",
+    "الصلاة علي النبي",
   ];
+
+  @override
+  void initState() {
+    _controller = AnimationController(
+      vsync: this,
+      duration: Duration(milliseconds: 200),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  void incrementSebha() {
+    setState(() {
+      count++;
+      if (count > 30) {
+        count =1;
+        index = (index + 1) % tasbeeh.length;
+      }
+    });
+    _controller.forward(from: 0);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,17 +79,12 @@ class _SebhaTabState extends State<SebhaTab> {
             ),
           ),
           GestureDetector(
-            onTap: () {
-              setState(() {
-                turns += 1 / 30;
-              });
-            },
+            onTap: incrementSebha,
             child: Stack(
               alignment: Alignment.center,
               children: [
-                AnimatedRotation(
-                  turns: turns,
-                  duration: Duration(seconds: 1),
+                RotationTransition(
+                  turns: Tween(begin: 0.0, end: 1 / 30).animate(_controller),
                   child: Image(
                     image: AssetImage("assets/images/SebhaBody 1.png"),
                   ),
@@ -70,17 +94,20 @@ class _SebhaTabState extends State<SebhaTab> {
                   child: Column(
                     children: [
                       SizedBox(height: 42),
-                      Text(
-                        tasbeeh[index],
-                        textAlign: TextAlign.center,
-                        style: Theme.of(context)
-                            .textTheme
-                            .titleLarge
-                            ?.copyWith(color: MYTheme.thirdColor, fontSize: 30),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Text(
+                          tasbeeh[index],
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context)
+                              .textTheme
+                              .titleLarge
+                              ?.copyWith(color: MYTheme.thirdColor, fontSize: 30),
+                        ),
                       ),
                       SizedBox(height: 16),
                       Text(
-                        "${index + 1}",
+                        count.toString(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context)
                             .textTheme
