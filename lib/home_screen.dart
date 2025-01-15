@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_app/home/tabs/ahadeth_tab/ahadeth_tab.dart';
-import 'package:islami_app/home/tabs/dates_tab.dart';
+import 'package:islami_app/home/tabs/dates_tab/dates_tab.dart';
 import 'package:islami_app/home/tabs/quran_tab/quran_tab.dart';
-import 'package:islami_app/home/tabs/radio_tab.dart';
-import 'package:islami_app/home/tabs/sebha_tab.dart';
+import 'package:islami_app/home/tabs/radio_tab/radio_tab.dart';
+import 'package:islami_app/home/tabs/sebha_tab/sebha_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -67,9 +67,9 @@ class _HomeScreenState extends State<HomeScreen> {
   List<Widget> tabs = [
     QuranTab(),
     AhadethTab(),
-    const SebhaTab(),
-    const RadioTab(),
-    const DatesTab()
+    SebhaTab(),
+    RadioTab(),
+    DatesTab()
   ];
 
   String getBackgroundImageName() {
