@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/home/models/sura_model.dart';
+import 'package:islami_app/my_theme/my_theme.dart';
 
 class SuraItemHor extends StatelessWidget {
-  SuraItemHor(
-      {super.key,
-      required this.nameAr,
-      required this.nameEng,
-      required this.verse});
+  SuraItemHor({super.key, required this.model});
 
-  String nameAr;
-  String nameEng;
-  String verse;
+  SuraModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +14,7 @@ class SuraItemHor extends StatelessWidget {
       height: 150,
       padding: EdgeInsets.symmetric(horizontal: 16),
       decoration: BoxDecoration(
-        color: const Color(0xFFE2BE7F),
+        color: MYTheme.primaryColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: Row(
@@ -28,34 +24,30 @@ class SuraItemHor extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                nameEng,
-                style: GoogleFonts.elMessiri(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                  color: const Color(0xFF202020),
-                ),
+                model.nameEng,
+                style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      color: MYTheme.secondryColor,
+                    ),
               ),
               const SizedBox(height: 12),
               Text(
-                nameAr,
-                style: GoogleFonts.elMessiri(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                  color: const Color(0xFF202020),
-                ),
+                model.nameAr,
+                style: Theme.of(context)
+                    .textTheme
+                    .titleLarge
+                    ?.copyWith(color: MYTheme.secondryColor),
               ),
               const SizedBox(height: 12),
               Text(
-                "$verse Verses",
-                style: GoogleFonts.elMessiri(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 14,
-                  color: const Color(0xFF202020),
-                ),
+                "${model.verse} Verses",
+                style: Theme.of(context)
+                    .textTheme
+                    .titleSmall
+                    ?.copyWith(color: MYTheme.secondryColor),
               ),
             ],
           ),
-        SizedBox(width: 5),
+          SizedBox(width: 5),
           const Image(
             image: AssetImage("assets/images/sura_item.png"),
           ),

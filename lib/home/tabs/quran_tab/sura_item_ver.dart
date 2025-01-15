@@ -1,19 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:islami_app/home/models/sura_model.dart';
 
 class SuraItemVer extends StatelessWidget {
-  SuraItemVer({
-    super.key,
-    required this.nameAr,
-    required this.index,
-    required this.nameEng,
-    required this.verse,
-  });
+  SuraItemVer({super.key, required this.model});
 
-  int index;
-  String nameAr;
-  String nameEng;
-  String verse;
+  SuraModel model;
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +20,10 @@ class SuraItemVer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                "$index",
-                style: GoogleFonts.elMessiri(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w700,
-                  color: const Color(0xFFFEFFE8),
-                ),
+                "${model.index}",
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: const Color(0xFFFEFFE8),
+                    ),
               ),
             ),
           ],
@@ -43,31 +33,25 @@ class SuraItemVer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              nameEng,
-              style: GoogleFonts.elMessiri(
-                fontSize: 20,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFFEFFE8),
-              ),
+              model.nameEng,
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                    color: const Color(0xFFFEFFE8),
+                  ),
             ),
             Text(
-              verse,
-              style: GoogleFonts.elMessiri(
-                fontSize: 14,
-                fontWeight: FontWeight.w700,
-                color: const Color(0xFFFEFFE8),
-              ),
+              "${model.verse} Verses",
+              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    color: const Color(0xFFFEFFE8),
+                  ),
             ),
           ],
         ),
         const Spacer(),
         Text(
-          nameAr,
-          style: GoogleFonts.elMessiri(
-            fontSize: 20,
-            fontWeight: FontWeight.w700,
-            color: const Color(0xFFFEFFE8),
-          ),
+          model.nameAr,
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                color: const Color(0xFFFEFFE8),
+              ),
         ),
       ],
     );

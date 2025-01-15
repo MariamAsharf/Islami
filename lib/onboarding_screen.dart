@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:introduction_screen/introduction_screen.dart';
+import 'package:islami_app/cache/cache_helper.dart';
 import 'package:islami_app/home_screen.dart';
+
+import 'my_theme/my_theme.dart';
 
 class OnboardingScreen extends StatefulWidget {
   const OnboardingScreen({super.key});
@@ -22,14 +25,14 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     var pageDecoration = PageDecoration(
       titleTextStyle: GoogleFonts.elMessiri(
           fontSize: 24.0,
-          color: const Color(0xFFE2BE7F),
+          color: MYTheme.primaryColor,
           fontWeight: FontWeight.w700),
       bodyTextStyle: GoogleFonts.elMessiri(
           fontSize: 20.0,
-          color: const Color(0xFFE2BE7F),
+          color: MYTheme.primaryColor,
           fontWeight: FontWeight.w700),
       bodyPadding: const EdgeInsets.fromLTRB(16.0, 0.0, 16.0, 16.0),
-      pageColor: const Color(0xFF202020),
+      pageColor: MYTheme.secondryColor,
       imagePadding: EdgeInsets.zero,
       imageFlex: 5,
     );
@@ -38,40 +41,20 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
       globalHeader: const Image(
         image: AssetImage("assets/images/onboarding_header.png"),
       ),
-      done: Text(
-        "Finish",
-        style: GoogleFonts.elMessiri(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          color: const Color(0xFFE2BE7F),
-        ),
-      ),
+      done: Text("Finish", style: Theme.of(context).textTheme.titleSmall),
       showDoneButton: true,
       onDone: () {
+        CacheHelper.saveEligibility();
         Navigator.pushReplacementNamed(context, HomeScreen.routeName);
       },
-      next: Text(
-        "Next",
-        style: GoogleFonts.elMessiri(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          color: const Color(0xFFE2BE7F),
-        ),
-      ),
+      next: Text("Next", style: Theme.of(context).textTheme.titleSmall),
       showNextButton: true,
-      back: Text(
-        "Back",
-        style: GoogleFonts.elMessiri(
-          fontSize: 16,
-          fontWeight: FontWeight.w700,
-          color: const Color(0xFFE2BE7F),
-        ),
-      ),
+      back: Text("Back", style: Theme.of(context).textTheme.titleSmall),
       showBackButton: true,
       dotsFlex: 2,
-      dotsDecorator: const DotsDecorator(
+      dotsDecorator: DotsDecorator(
         color: Color(0xFF707070),
-        activeColor: Color(0xFFE2BE7F),
+        activeColor: MYTheme.primaryColor,
         size: Size(7, 7),
       ),
       pages: [

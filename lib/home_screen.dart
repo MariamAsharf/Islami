@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:islami_app/home/tabs/ahadeth_tab.dart';
-import 'package:islami_app/home/tabs/dates_tab.dart';
+import 'package:islami_app/home/tabs/ahadeth_tab/ahadeth_tab.dart';
+import 'package:islami_app/home/tabs/dates_tab/dates_tab.dart';
 import 'package:islami_app/home/tabs/quran_tab/quran_tab.dart';
-import 'package:islami_app/home/tabs/radio_tab.dart';
-import 'package:islami_app/home/tabs/sebha_tab.dart';
+import 'package:islami_app/home/tabs/radio_tab/radio_tab.dart';
+import 'package:islami_app/home/tabs/sebha_tab/sebha_tab.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,22 +29,13 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         child: Scaffold(
-          backgroundColor: const Color(0x99202020),
           body: tabs[currentindex],
           bottomNavigationBar: BottomNavigationBar(
-            backgroundColor: const Color(0xFFE2BE7F),
             currentIndex: currentindex,
             onTap: (value) {
               currentindex = value;
               setState(() {});
             },
-            selectedItemColor: Colors.white,
-            unselectedItemColor: Colors.black,
-            showSelectedLabels: true,
-            showUnselectedLabels: false,
-            selectedLabelStyle: GoogleFonts.elMessiri(
-                fontSize: 12, fontWeight: FontWeight.w700),
-            type: BottomNavigationBarType.fixed,
             items: [
               BottomNavigationBarItem(
                 icon: _buildItem("quran", 0),
@@ -75,10 +66,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   List<Widget> tabs = [
     QuranTab(),
-    const AhadethTab(),
-    const SebhaTab(),
-    const RadioTab(),
-    const DatesTab()
+    AhadethTab(),
+    SebhaTab(),
+    RadioTab(),
+    DatesTab()
   ];
 
   String getBackgroundImageName() {
