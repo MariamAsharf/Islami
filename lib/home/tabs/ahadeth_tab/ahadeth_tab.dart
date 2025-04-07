@@ -1,9 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:islami_app/hadith_details/hadith_details_screen.dart';
 import 'package:islami_app/home/models/hadith_model.dart';
 import 'package:islami_app/my_theme/my_theme.dart';
+
+import 'hadith_details/hadith_details_screen.dart';
 
 class AhadethTab extends StatefulWidget {
   AhadethTab({super.key});

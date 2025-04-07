@@ -1,16 +1,34 @@
-part of 'radio_cubit.dart';
+import 'package:islami_app/home/tabs/radio_tab/repo/radio_reposetory.dart';
+import 'package:islami_app/home/tabs/radio_tab/repo/reciters_reposetory.dart';
 
-@immutable
-sealed class RadioState {}
+abstract class RadioStates {}
 
-final class RadioInitial extends RadioState {}
+class RadioInitial extends RadioStates {}
 
-class RadioLoadingState extends RadioState {}
+class RadioLoading extends RadioStates {}
 
-class RadioFailingState extends RadioState {
-  String message;
+class RadioSuccess extends RadioStates {
+  final List<Radios> radios;
 
-  RadioFailingState(this.message);
+  RadioSuccess({required this.radios});
 }
 
-class RadioSuccessState extends RadioState {}
+class RadioError extends RadioStates {
+  final String error;
+
+  RadioError(this.error);
+}
+
+class reciterLoading extends RadioStates {}
+
+class reciterSuccess extends RadioStates {
+  final List<Reciters> reciters;
+
+  reciterSuccess({required this.reciters});
+}
+
+class reciterError extends RadioStates {
+  final String error;
+
+  reciterError(this.error);
+}

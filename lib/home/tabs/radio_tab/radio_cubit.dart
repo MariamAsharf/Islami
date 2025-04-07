@@ -1,31 +1,48 @@
-import 'dart:convert';
-
-import 'package:bloc/bloc.dart';
-import 'package:http/http.dart' as http;
+import 'package:dio/dio.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:islami_app/home/tabs/radio_tab/radio_state.dart';
 import 'package:islami_app/home/tabs/radio_tab/repo/radio_reposetory.dart';
-import 'package:meta/meta.dart';
+import 'package:islami_app/home/tabs/radio_tab/repo/reciters_reposetory.dart';
 
-part 'radio_state.dart';
-
-class RadioCubit extends Cubit<RadioState> {
+class RadioCubit extends Cubit<RadioStates> {
   RadioCubit() : super(RadioInitial());
 
-  getRadio() async {
-    emit(RadioLoadingState());
+  static RadioCubit get(context) => BlocProvider.of(context);
+
+  List<Radios> radios = [];
+  List<Reciters> reciters = [];
+
+  Future<void> getRadios() async {
+    if (radios.isNotEmpty) return;  // إذا كانت البيانات محملة مسبقًا لا نقوم بتحميلها مرة أخرى
+    emit(RadioLoading());
     try {
-      Uri url = Uri.parse("https://mp3quran.net/api/");
-      http.Response response = await http.get(url);
-
-      if (response.statusCode == 200) {
-        var jsonData = jsonDecode(response.body);
-        RadioReposetory radioReposetory = RadioReposetory.fromJson(jsonData);
-
-        emit(RadioSuccessState());
-      } else {
-        emit(RadioFailingState('Failed to load sources'));
-      }
+      final response = await Dio().get('https://mp3quran.net/api/v3/radios');
+      final data = RadioReposetory.fromJson(response.data);
+      radios = data.radios ?? [];
+      emit(RadioSuccess(radios: radios));
     } catch (e) {
-      emit(RadioFailingState("Exception: $e"));
+      emit(RadioError(e.toString()));
+    }
+  }
+
+  Future<void> getReciters() async {
+    if (reciters.isNotEmpty) return;  // إذا كانت البيانات محملة مسبقًا لا نقوم بتحميلها مرة أخرى
+    emit(reciterLoading());
+    try {
+      final response = await Dio().get('https://www.mp3quran.net/api/v3/reciters?language=ar');
+      final data = RecitersReposetory.fromJson(response.data);
+      reciters = data.reciters ?? [];
+      emit(reciterSuccess(reciters: reciters));
+    } catch (e) {
+      emit(reciterError(e.toString()));
+    }
+  }
+
+  Future<void> changeTab(int index) async {
+    if (index == 0) {
+      await getRadios();
+    } else if (index == 1) {
+      await getReciters();
     }
   }
 }

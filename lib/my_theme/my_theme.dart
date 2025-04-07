@@ -21,7 +21,7 @@ class MYTheme {
         color: primaryColor,
       ),
       centerTitle: true,
-      backgroundColor: Color(0xFF202020),
+      backgroundColor: Color(0x99202020),
     ),
     dividerTheme: DividerThemeData(
       color: thirdColor,
@@ -36,7 +36,7 @@ class MYTheme {
       showSelectedLabels: true,
       showUnselectedLabels: false,
       selectedLabelStyle:
-          GoogleFonts.elMessiri(fontSize: 12, fontWeight: FontWeight.w700),
+          GoogleFonts.almarai(fontSize: 12, fontWeight: FontWeight.w700),
       type: BottomNavigationBarType.fixed,
     ),
   );
