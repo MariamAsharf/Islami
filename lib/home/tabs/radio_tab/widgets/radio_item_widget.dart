@@ -52,7 +52,6 @@ class _RadioItemWidgetState extends State<RadioItemWidget> {
         _isPlaying = false;
       });
     } else {
-      // لازم نعمل setSource كل مرة علشان يبدأ من الأول
       await _audioPlayer.setSource(UrlSource(_audioUrl!));
       await _audioPlayer.resume();
       setState(() {
