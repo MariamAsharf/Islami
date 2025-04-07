@@ -20,7 +20,7 @@ class SuraItemVer extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 4),
               child: Text(
-                "${model.index}",
+                "${model.index + 1}",
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                       color: const Color(0xFFFEFFE8),
                     ),
@@ -28,7 +28,7 @@ class SuraItemVer extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: 24),
+        const SizedBox(width: 12),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

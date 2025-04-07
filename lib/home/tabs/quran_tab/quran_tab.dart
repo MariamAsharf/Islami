@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:islami_app/home/models/sura_model.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_hor.dart';
 import 'package:islami_app/home/tabs/quran_tab/sura_item_ver.dart';
@@ -123,8 +122,17 @@ class _QuranTabState extends State<QuranTab> {
           child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemBuilder: (context, index) {
-                return SuraItemHor(
-                  model: SuraModel.getSuraModel(index),
+                return InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      SuraDetailsScreen.routeName,
+                      arguments: SuraModel.getSuraModel(index),
+                    );
+                  },
+                  child: SuraItemHor(
+                    model: SuraModel.getSuraModel(index),
+                  ),
                 );
               },
               separatorBuilder: (context, index) => const SizedBox(width: 10),

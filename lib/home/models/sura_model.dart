@@ -149,7 +149,7 @@ class SuraModel {
   static List<String> suraNameEng = [
     "Al-Fatiha",
     "Al-Baqarah",
-    "Aal-E-Imran",
+    "Aal-Imran",
     "An-Nisa'",
     "Al-Ma'idah",
     "Al-An'am",
@@ -262,6 +262,7 @@ class SuraModel {
     "Al-Falaq",
     "An-Nas"
   ];
+
   static List<String> verses = [
     '7',
     '286',

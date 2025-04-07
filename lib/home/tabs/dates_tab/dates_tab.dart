@@ -121,24 +121,21 @@ class DatesTab extends StatelessWidget {
                       options: CarouselOptions(
                           height: double.infinity,
                           enlargeCenterPage: true,
-                          viewportFraction: 0.4,
+                          viewportFraction: 0.35,
                           scrollDirection: Axis.horizontal),
                       items: Times.map((time) {
                         return Builder(
                           builder: (BuildContext context) {
-                            return Container(
-                              margin: EdgeInsets.symmetric(horizontal: 2),
-                              height: 120,
-                              width: 104,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
-                                color: Color(0x99534731),
-                              ),
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 9, vertical: 12),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                            return Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Image(
+                                  image:
+                                      AssetImage("assets/images/Rectangle.png"),
+                                ),
+                                Column(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.center,
                                   children: [
                                     Text(
                                       time["name"]!,
@@ -147,8 +144,8 @@ class DatesTab extends StatelessWidget {
                                           .textTheme
                                           .titleSmall
                                           ?.copyWith(
-                                              color: MYTheme.thirdColor,
-                                              fontSize: 14),
+                                            color: MYTheme.thirdColor,
+                                          ),
                                     ),
                                     Text(
                                       time["time"]!,
@@ -157,8 +154,9 @@ class DatesTab extends StatelessWidget {
                                           .textTheme
                                           .titleLarge
                                           ?.copyWith(
-                                              color: MYTheme.thirdColor,
-                                              fontSize: 32),
+                                            color: MYTheme.thirdColor,
+                                            fontSize: 28,
+                                          ),
                                     ),
                                     Text(
                                       time["date"]!,
@@ -166,11 +164,12 @@ class DatesTab extends StatelessWidget {
                                       style: Theme.of(context)
                                           .textTheme
                                           .titleSmall
-                                          ?.copyWith(color: MYTheme.thirdColor),
+                                          ?.copyWith(
+                                              color: MYTheme.thirdColor),
                                     ),
                                   ],
                                 ),
-                              ),
+                              ],
                             );
                           },
                         );
@@ -240,7 +239,7 @@ class DatesTab extends StatelessWidget {
                             azkar["name"]!,
                             style: Theme.of(context)
                                 .textTheme
-                                .titleMedium
+                                .titleSmall
                                 ?.copyWith(color: MYTheme.thirdColor),
                           ),
                         ],

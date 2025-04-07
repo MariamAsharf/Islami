@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:islami_app/home/models/hadith_model.dart';
-import 'package:islami_app/my_theme/my_theme.dart';
 
 class HadithDetailsScreen extends StatelessWidget {
   static const String routeName = "HadithDetailsScreen";
@@ -14,9 +12,7 @@ class HadithDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFF202020),
       appBar: AppBar(
-        title: Text(
-            "Hadith ",
-            style: Theme.of(context).textTheme.titleMedium),
+        title: Text("Hadith", style: Theme.of(context).textTheme.titleMedium),
       ),
       body: Stack(
         alignment: Alignment.center,
@@ -44,9 +40,11 @@ class HadithDetailsScreen extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 26),
-                  Text(model.content.first,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleMedium),
+                  Text(
+                    model.content.first,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleSmall,
+                  ),
                 ],
               ),
             ),

@@ -40,7 +40,7 @@ class _SebhaTabState extends State<SebhaTab>
   void incrementSebha() {
     setState(() {
       count++;
-      if (count > 30) {
+      if (count > 33) {
         count =1;
         index = (index + 1) % tasbeeh.length;
       }

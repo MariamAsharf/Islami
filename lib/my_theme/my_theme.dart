@@ -9,11 +9,11 @@ class MYTheme {
   static ThemeData lightTheme = ThemeData(
     scaffoldBackgroundColor: const Color(0x99202020),
     textTheme: TextTheme(
-      titleLarge: GoogleFonts.elMessiri(
+      titleLarge: GoogleFonts.almarai(
           fontSize: 24.0, color: primaryColor, fontWeight: FontWeight.w700),
-      titleMedium: GoogleFonts.elMessiri(
+      titleMedium: GoogleFonts.almarai(
           fontSize: 20.0, color: primaryColor, fontWeight: FontWeight.w700),
-      titleSmall: GoogleFonts.elMessiri(
+      titleSmall: GoogleFonts.almarai(
           fontSize: 16.0, color: primaryColor, fontWeight: FontWeight.w700),
     ),
     appBarTheme: AppBarTheme(
