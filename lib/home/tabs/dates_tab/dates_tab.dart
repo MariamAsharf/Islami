@@ -5,7 +5,7 @@ import 'package:islami_app/home/tabs/dates_tab/timing_cubit.dart';
 import 'package:islami_app/home/tabs/dates_tab/timing_state.dart';
 import 'package:islami_app/my_theme/my_theme.dart';
 
-import 'azkar_widget.dart';
+import 'azkar/azkar_widget.dart';
 
 class DatesTab extends StatelessWidget {
   DatesTab({super.key});
@@ -100,6 +100,7 @@ class DatesTab extends StatelessWidget {
                         ),
                       ),
                       Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Padding(
                             padding: const EdgeInsets.symmetric(horizontal: 20),

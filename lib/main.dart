@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:islami_app/cache/cache_helper.dart';
+import 'package:islami_app/home/tabs/dates_tab/azkar/azkar_details.dart';
 import 'package:islami_app/home/tabs/dates_tab/timing_cubit.dart';
 import 'package:islami_app/home/tabs/radio_tab/radio_cubit.dart';
 import 'package:islami_app/my_theme/my_theme.dart';
@@ -11,13 +12,13 @@ import 'home_screen.dart';
 import 'onboarding_screen.dart';
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
+    FlutterLocalNotificationsPlugin();
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   const AndroidInitializationSettings androidInitSettings =
-  AndroidInitializationSettings('@mipmap/ic_launcher');
+      AndroidInitializationSettings('@mipmap/ic_launcher');
 
   const InitializationSettings initializationSettings = InitializationSettings(
     android: androidInitSettings,
@@ -36,8 +37,9 @@ class IslamiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => RadioCubit()),
-        BlocProvider(create: (context) => TimingsCubit()..fetchTimings(context)),
+        BlocProvider(create: (context) => RadioCubit()..getRadios()..getReciters()),
+        BlocProvider(
+            create: (context) => TimingsCubit()..fetchTimings(context)),
       ],
       child: MaterialApp(
         theme: MYTheme.lightTheme,

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:just_audio/just_audio.dart';
-import 'package:islami_app/my_theme/my_theme.dart';
 import 'package:islami_app/home/tabs/radio_tab/repo/radio_reposetory.dart';
+import 'package:islami_app/my_theme/my_theme.dart';
+import 'package:just_audio/just_audio.dart';
 
 class RadioItemWidget extends StatefulWidget {
   final Radios radio;
@@ -25,6 +25,7 @@ class _RadioItemWidgetState extends State<RadioItemWidget> {
 
   @override
   void dispose() {
+    _player.stop();
     _player.dispose();
     super.dispose();
   }
@@ -34,8 +35,17 @@ class _RadioItemWidgetState extends State<RadioItemWidget> {
       await _player.pause();
     } else {
       try {
-        await _player.setUrl(widget.radio.url!);
-        await _player.play();
+        if (_isPlaying) {
+          await _player.stop();
+        }
+
+        print("Loading radio URL: ${widget.radio.url}");
+        if (widget.radio.url != null && widget.radio.url!.isNotEmpty) {
+          await _player.setUrl(widget.radio.url!);
+          await _player.play();
+        } else {
+          print("URL is empty or null");
+        }
       } catch (e) {
         print("Error loading radio: $e");
       }

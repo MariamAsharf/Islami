@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:islami_app/home/tabs/dates_tab/repo/zekr_item_model.dart';
 import 'package:islami_app/my_theme/my_theme.dart';
+
+import 'azkar_details.dart';
+import 'azkar_service.dart';
 
 class AzkarWidget extends StatelessWidget {
   AzkarWidget({super.key});
@@ -30,7 +34,47 @@ class AzkarWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             final azkar = Azkars[index];
             return GestureDetector(
-              onTap: () {},
+              onTap: () async {
+                final zekrModel = await AzkarService.loadAzkarJson();
+                List<ZekrItemModel> selectedList = [];
+
+                switch (index) {
+                  case 0:
+                    selectedList = zekrModel.evening ?? [];
+                    break;
+                  case 1:
+                    selectedList = zekrModel.morning ?? [];
+                    break;
+                  case 2:
+                    selectedList = zekrModel.afterPrayer ?? [];
+                    break;
+                  case 3:
+                    selectedList = zekrModel.tasbeeh ?? [];
+                    break;
+                  case 4:
+                    selectedList = zekrModel.sleep ?? [];
+                    break;
+                  case 5:
+                    selectedList = zekrModel.wakeUp ?? [];
+                    break;
+                  case 6:
+                    selectedList = zekrModel.quranic ?? [];
+                    break;
+                  case 7:
+                    selectedList = zekrModel.prophets ?? [];
+                    break;
+                }
+
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => AzkarDetails(
+                      title: azkar["name"]!,
+                      azkarList: selectedList,
+                    ),
+                  ),
+                );
+              },
               child: Container(
                 decoration: BoxDecoration(
                     color: MYTheme.secondryColor,

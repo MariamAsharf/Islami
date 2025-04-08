@@ -150,11 +150,11 @@ class TimingsCubit extends Cubit<TimingsState> {
 
   void toggleAdhanSound() {
     isAdhanSoundOn = !isAdhanSoundOn;
-    emit(state); // إعادة البناء للتحديث
+    emit(state); 
   }
 
   void checkPrayerTimeForNotification(Map<String, String> timings) {
-    _notificationTimer?.cancel(); // نلغي أي تايمر سابق
+    _notificationTimer?.cancel(); 
 
     _notificationTimer = Timer.periodic(Duration(minutes: 1), (timer) async {
       final now = DateTime.now();
