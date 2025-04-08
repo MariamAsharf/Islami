@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio/just_audio.dart';
+import 'package:islami_app/home/tabs/radio_tab/repo/reciters_reposetory.dart';
 import 'package:islami_app/my_theme/my_theme.dart';
-import 'package:islami_app/home/tabs/radio_tab/repo/radio_reposetory.dart';
 
-class RadioItemWidget extends StatefulWidget {
-  final Radios radio;
+class RecitersItemWidget extends StatefulWidget {
+  final Reciters reciter;
 
-  const RadioItemWidget({required this.radio});
+  const RecitersItemWidget({required this.reciter});
 
   @override
-  State<RadioItemWidget> createState() => _RadioItemWidgetState();
+  State<RecitersItemWidget> createState() => _RecitersItemWidget();
 }
 
-class _RadioItemWidgetState extends State<RadioItemWidget> {
+class _RecitersItemWidget extends State<RecitersItemWidget> {
   late AudioPlayer _player;
   bool _isPlaying = false;
   double _volume = 1.0;
@@ -21,6 +21,28 @@ class _RadioItemWidgetState extends State<RadioItemWidget> {
   void initState() {
     super.initState();
     _player = AudioPlayer();
+
+    _initPlaylist();
+  }
+
+  Future<void> _initPlaylist() async {
+    try {
+      if (widget.reciter.moshaf != null && widget.reciter.moshaf!.isNotEmpty) {
+        final moshaf = widget.reciter.moshaf!.first;
+        final serverUrl = moshaf.server;
+        final surahList = List.generate(114, (i) => '${(i + 1).toString().padLeft(3, '0')}.mp3');
+
+        final playlist = ConcatenatingAudioSource(
+          children: surahList.map((surah) {
+            return AudioSource.uri(Uri.parse('$serverUrl/$surah'));
+          }).toList(),
+        );
+
+        await _player.setAudioSource(playlist);
+      }
+    } catch (e) {
+      print("Error loading playlist: $e");
+    }
   }
 
   @override
@@ -30,31 +52,29 @@ class _RadioItemWidgetState extends State<RadioItemWidget> {
   }
 
   void _togglePlayPause() async {
-    if (_isPlaying) {
+    if (_player.playerState.playing) {
       await _player.pause();
+      setState(() {
+        _isPlaying = false;
+      });
     } else {
-      try {
-        await _player.setUrl(widget.radio.url!);
-        await _player.play();
-      } catch (e) {
-        print("Error loading radio: $e");
-      }
+      await _player.play();
+      setState(() {
+        _isPlaying = true;
+      });
     }
-    setState(() {
-      _isPlaying = !_isPlaying;
-    });
   }
 
-  void _stopRadio() async {
+  void _stopAudio() async {
     await _player.stop();
     setState(() {
       _isPlaying = false;
     });
   }
 
-  void _toggleVolume() async {
+  void _adjustVolume() {
     _volume = _volume == 1.0 ? 0.0 : 1.0;
-    await _player.setVolume(_volume);
+    _player.setVolume(_volume);
     setState(() {});
   }
 
@@ -80,19 +100,16 @@ class _RadioItemWidgetState extends State<RadioItemWidget> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8),
               child: Text(
-                widget.radio.name ?? 'No Name',
+                widget.reciter.name ?? 'No Name',
                 textAlign: TextAlign.center,
-                style: Theme.of(context)
-                    .textTheme
-                    .titleMedium
-                    ?.copyWith(color: MYTheme.secondryColor),
+                style: Theme.of(context).textTheme.titleMedium?.copyWith(color: MYTheme.secondryColor),
               ),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  onPressed: _stopRadio,
+                  onPressed: _stopAudio,
                   icon: Icon(Icons.stop, color: MYTheme.secondryColor),
                 ),
                 SizedBox(width: 16),
@@ -105,7 +122,7 @@ class _RadioItemWidgetState extends State<RadioItemWidget> {
                 ),
                 SizedBox(width: 16),
                 IconButton(
-                  onPressed: _toggleVolume,
+                  onPressed: _adjustVolume,
                   icon: Icon(
                     _volume > 0.5 ? Icons.volume_up : Icons.volume_off,
                     color: MYTheme.secondryColor,

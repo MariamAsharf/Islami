@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/home/tabs/radio_tab/radio_cubit.dart';
 import 'package:islami_app/home/tabs/radio_tab/radio_state.dart';
 import 'package:islami_app/home/tabs/radio_tab/widgets/radio_item_widget.dart';
+import 'package:islami_app/home/tabs/radio_tab/widgets/reciters_item_widget.dart';
 import 'package:islami_app/my_theme/my_theme.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -12,7 +13,7 @@ class RadioTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RadioCubit()..getRadios(),
+      create: (context) => RadioCubit()..getRadios()..getReciters(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -39,7 +40,7 @@ class RadioTab extends StatelessWidget {
               labels: ['Radio', 'Reciters'],
               onToggle: (index) {
                 final cubit = BlocProvider.of<RadioCubit>(context);
-                if (index != null) {  // تأكد من أن index ليس null
+                if (index != null) {
                   cubit.changeTab(index);
                 }
               },
@@ -75,7 +76,7 @@ class RadioTab extends StatelessWidget {
                       scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
                         final reciter = reciters[index];
-                        return RadioItemWidget(radio: reciter);
+                        return RecitersItemWidget(reciter: reciter);
                       },
                       separatorBuilder: (context, index) => SizedBox(height: 8),
                       itemCount: reciters.length,
@@ -91,7 +92,3 @@ class RadioTab extends StatelessWidget {
     );
   }
 }
-
-
-
-

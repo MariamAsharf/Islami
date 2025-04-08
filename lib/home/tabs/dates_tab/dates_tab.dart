@@ -1,255 +1,258 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:islami_app/home/tabs/dates_tab/timing_cubit.dart';
+import 'package:islami_app/home/tabs/dates_tab/timing_state.dart';
 import 'package:islami_app/my_theme/my_theme.dart';
+
+import 'azkar_widget.dart';
 
 class DatesTab extends StatelessWidget {
   DatesTab({super.key});
 
-  List<Map<String, String>> Times = [
-    {
-      "name": "Fajr",
-      "time": "03:30",
-      "date": "AM",
-    },
-    {
-      "name": "Dhuhr",
-      "time": "01:01",
-      "date": "PM",
-    },
-    {
-      "name": "Asr",
-      "time": "04:38",
-      "date": "PM",
-    },
-    {
-      "name": "Maghreb",
-      "time": "07:57",
-      "date": "PM",
-    },
-    {
-      "name": "Isha",
-      "time": "09:57",
-      "date": "PM",
-    }
-  ];
-  List<Map<String, String>> Azkars = [
-    {"name": "Evening Azkar", "image": "assets/images/Illustration.png"},
-    {"name": "Morning Azkar", "image": "assets/images/Illustration-1.png"},
-    {"name": "Pray Azkar", "image": "assets/images/Illustration-2.png"},
-    {"name": "Tasabeeh Azkar", "image": "assets/images/Illustration-3.png"},
-    {"name": "Sleep Azkar", "image": "assets/images/Illustration-4.png"},
-    {"name": "WakeUp Azkar", "image": "assets/images/Illustration-5.png"},
-    {"name": "Quran Doaa", "image": "assets/images/Illustration-6.png"},
-    {"name": "Rasols Doaa", "image": "assets/images/Illustration-7.png"},
-  ];
-
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const Image(
-            image: AssetImage("assets/images/onboarding_header.png"),
-            width: 291,
-            height: 170,
-          ),
-          SizedBox(height: 16),
-          Stack(
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(40),
-                  color: Color(0xFF856B3F),
-                ),
-                child: Image(
-                  image: AssetImage("assets/images/Group 9.png"),
-                ),
-              ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        Text(
-                          textAlign: TextAlign.start,
-                          "16 Jul,\n2024",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(color: MYTheme.thirdColor),
+    return BlocProvider(
+      create: (context) => TimingsCubit()..fetchTimings(context),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const Image(
+              image: AssetImage("assets/images/onboarding_header.png"),
+              width: 291,
+              height: 170,
+            ),
+            SizedBox(height: 16),
+            BlocBuilder<TimingsCubit, TimingsState>(
+              builder: (context, state) {
+                final cubit = BlocProvider.of<TimingsCubit>(context);
+                if (state is TimingsLoading) {
+                  return Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Color(0xFF856B3F),
                         ),
-                        Spacer(),
-                        Column(
-                          children: [
-                            Text(
-                              "Pray Time",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(color: MYTheme.secondryColor),
-                            ),
-                            Text(
-                              "Tuesday",
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .titleMedium
-                                  ?.copyWith(color: MYTheme.secondryColor),
-                            ),
-                          ],
+                        child: Image(
+                          image: AssetImage("assets/images/Group 9.png"),
                         ),
-                        Spacer(),
-                        Text(
-                          textAlign: TextAlign.end,
-                          "09 Muh,\n1446",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(color: MYTheme.thirdColor),
+                      ),
+                      Center(child: CircularProgressIndicator()),
+                    ],
+                  );
+                } else if (state is TimingsError) {
+                  return Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Color(0xFF856B3F),
                         ),
-                      ],
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  SizedBox(
-                    height: 120,
-                    child: CarouselSlider(
-                      options: CarouselOptions(
-                          height: double.infinity,
-                          enlargeCenterPage: true,
-                          viewportFraction: 0.35,
-                          scrollDirection: Axis.horizontal),
-                      items: Times.map((time) {
-                        return Builder(
-                          builder: (BuildContext context) {
-                            return Stack(
-                              alignment: Alignment.center,
+                        child: Image(
+                          image: AssetImage("assets/images/Group 9.png"),
+                        ),
+                      ),
+                      Center(child: Text(state.message)),
+                    ],
+                  );
+                } else if (state is TimingsSuccess) {
+                  final timings = state.timings;
+                  final gregorianDate = state.gregorianDate;
+                  final hijriDate = state.hijriDate;
+                  final weekday = state.weekday;
+
+                  final times = [
+                    {"name": "Fajr", "time": timings['Fajr'] ?? "00:00"},
+                    {"name": "Sunrise", "time": timings['Sunrise'] ?? "00:00"},
+                    {"name": "Dhuhr", "time": timings['Dhuhr'] ?? "00:00"},
+                    {"name": "Asr", "time": timings['Asr'] ?? "00:00"},
+                    {"name": "Sunset", "time": timings['Sunset'] ?? "00:00"},
+                    {"name": "Maghrib", "time": timings['Maghrib'] ?? "00:00"},
+                    {"name": "Isha", "time": timings['Isha'] ?? "00:00"},
+                    {"name": "Imsak", "time": timings['Imsak'] ?? "00:00"},
+                    {
+                      "name": "Midnight",
+                      "time": timings['Midnight'] ?? "00:00"
+                    },
+                    {
+                      "name": "Firstthird",
+                      "time": timings['Firstthird'] ?? "00:00"
+                    },
+                    {
+                      "name": "Lastthird",
+                      "time": timings['Lastthird'] ?? "00:00"
+                    },
+                  ];
+
+                  return Stack(
+                    children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(40),
+                          color: Color(0xFF856B3F),
+                        ),
+                        child: Image(
+                          image: AssetImage("assets/images/Group 9.png"),
+                        ),
+                      ),
+                      Column(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
                               children: [
-                                Image(
-                                  image:
-                                      AssetImage("assets/images/Rectangle.png"),
+                                Text(
+                                  gregorianDate,
+                                  textAlign: TextAlign.start,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(
+                                          color: MYTheme.thirdColor,
+                                          fontSize: 12),
                                 ),
+                                Spacer(),
                                 Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      time["name"]!,
-                                      textAlign: TextAlign.center,
+                                      "Pray Time",
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleSmall
+                                          .titleMedium
                                           ?.copyWith(
-                                            color: MYTheme.thirdColor,
-                                          ),
+                                              color: MYTheme.secondryColor),
                                     ),
                                     Text(
-                                      time["time"]!,
-                                      textAlign: TextAlign.center,
+                                      weekday,
                                       style: Theme.of(context)
                                           .textTheme
-                                          .titleLarge
+                                          .titleMedium
                                           ?.copyWith(
-                                            color: MYTheme.thirdColor,
-                                            fontSize: 28,
-                                          ),
-                                    ),
-                                    Text(
-                                      time["date"]!,
-                                      textAlign: TextAlign.center,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .titleSmall
-                                          ?.copyWith(
-                                              color: MYTheme.thirdColor),
+                                              color: MYTheme.secondryColor),
                                     ),
                                   ],
                                 ),
+                                Spacer(),
+                                Text(
+                                  textAlign: TextAlign.end,
+                                  hijriDate,
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(
+                                          color: MYTheme.thirdColor,
+                                          fontSize: 12),
+                                ),
                               ],
-                            );
-                          },
-                        );
-                      }).toList(),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Row(
-                      children: [
-                        Spacer(),
-                        Text(
-                          "Next Pray - 02:32",
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(color: MYTheme.secondryColor),
-                        ),
-                        SizedBox(width: 50),
-                        Icon(
-                          Icons.volume_off_rounded,
-                          size: 25,
-                          color: MYTheme.secondryColor,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              )
-            ],
-          ),
-          SizedBox(height: 20),
-          Text(
-            "Azkar",
-            style: Theme.of(context)
-                .textTheme
-                .titleSmall
-                ?.copyWith(color: MYTheme.thirdColor),
-          ),
-          SizedBox(height: 20),
-          Expanded(
-            child: GridView.builder(
-                scrollDirection: Axis.vertical,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  mainAxisSpacing: 20,
-                  crossAxisSpacing: 20,
-                  childAspectRatio: 0.8,
-                ),
-                itemCount: Azkars.length,
-                itemBuilder: (context, index) {
-                  final azkar = Azkars[index];
-                  return GestureDetector(
-                    onTap: () {},
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: MYTheme.secondryColor,
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: MYTheme.primaryColor)),
-                      child: Column(
-                        children: [
-                          Image(
-                            image: AssetImage(azkar["image"]!),
+                            ),
                           ),
-                          Text(
-                            azkar["name"]!,
-                            style: Theme.of(context)
-                                .textTheme
-                                .titleSmall
-                                ?.copyWith(color: MYTheme.thirdColor),
+                          SizedBox(height: 16),
+                          SizedBox(
+                            height: 120,
+                            child: CarouselSlider(
+                              options: CarouselOptions(
+                                height: double.infinity,
+                                enlargeCenterPage: true,
+                                viewportFraction: 0.35,
+                                scrollDirection: Axis.horizontal,
+                              ),
+                              items: times.map((time) {
+                                return Builder(
+                                  builder: (BuildContext context) {
+                                    return Stack(
+                                      alignment: Alignment.center,
+                                      children: [
+                                        Image(
+                                            image: AssetImage(
+                                                "assets/images/Rectangle.png")),
+                                        Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Text(
+                                              time["name"]!,
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleSmall
+                                                  ?.copyWith(
+                                                      color:
+                                                          MYTheme.thirdColor),
+                                            ),
+                                            Text(
+                                              time["time"]!,
+                                              textAlign: TextAlign.center,
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .titleLarge
+                                                  ?.copyWith(
+                                                      color: MYTheme.thirdColor,
+                                                      fontSize: 28),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              }).toList(),
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              children: [
+                                Spacer(),
+                                Text(
+                                  "Next Pray - ${state.nextPrayerTime}",
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .titleSmall
+                                      ?.copyWith(color: MYTheme.secondryColor),
+                                ),
+                                SizedBox(width: 50),
+                                IconButton(
+                                  icon: Icon(
+                                    cubit.isAdhanSoundOn
+                                        ? Icons.volume_up_rounded
+                                        : Icons.volume_off_rounded,
+                                    size: 25,
+                                    color: MYTheme.secondryColor,
+                                  ),
+                                  onPressed: () {
+                                    cubit.toggleAdhanSound();
+                                  },
+                                )
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                    ),
+                    ],
                   );
-                }),
-          ),
-          SizedBox(height: 8),
-        ],
+                }
+
+                return Container();
+              },
+            ),
+            SizedBox(height: 20),
+            Text(
+              "Azkar",
+              style: Theme.of(context)
+                  .textTheme
+                  .titleSmall
+                  ?.copyWith(color: MYTheme.thirdColor),
+            ),
+            SizedBox(height: 20),
+            AzkarWidget(),
+            SizedBox(height: 8),
+          ],
+        ),
       ),
     );
   }

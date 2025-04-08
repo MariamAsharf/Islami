@@ -13,7 +13,6 @@ class RadioCubit extends Cubit<RadioStates> {
   List<Reciters> reciters = [];
 
   Future<void> getRadios() async {
-    if (radios.isNotEmpty) return;  // إذا كانت البيانات محملة مسبقًا لا نقوم بتحميلها مرة أخرى
     emit(RadioLoading());
     try {
       final response = await Dio().get('https://mp3quran.net/api/v3/radios');
@@ -26,10 +25,9 @@ class RadioCubit extends Cubit<RadioStates> {
   }
 
   Future<void> getReciters() async {
-    if (reciters.isNotEmpty) return;  // إذا كانت البيانات محملة مسبقًا لا نقوم بتحميلها مرة أخرى
     emit(reciterLoading());
     try {
-      final response = await Dio().get('https://www.mp3quran.net/api/v3/reciters?language=ar');
+      final response = await Dio().get('https://www.mp3quran.net/api/v3/reciters');
       final data = RecitersReposetory.fromJson(response.data);
       reciters = data.reciters ?? [];
       emit(reciterSuccess(reciters: reciters));
