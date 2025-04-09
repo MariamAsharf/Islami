@@ -37,7 +37,7 @@ class IslamiApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => RadioCubit()..getRadios()..getReciters()),
+        BlocProvider(create: (context) => RadioCubit()),
         BlocProvider(
             create: (context) => TimingsCubit()..fetchTimings(context)),
       ],

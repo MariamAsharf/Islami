@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:islami_app/home/tabs/radio_tab/radio_cubit.dart';
 import 'package:islami_app/home/tabs/radio_tab/radio_state.dart';
-import 'package:islami_app/home/tabs/radio_tab/widgets/radio_item_widget.dart';
-import 'package:islami_app/home/tabs/radio_tab/widgets/reciters_item_widget.dart';
+import 'package:islami_app/home/tabs/radio_tab/widgets/media_item_widget.dart'; // تأكد من إضافة import
 import 'package:islami_app/my_theme/my_theme.dart';
 import 'package:toggle_switch/toggle_switch.dart';
 
@@ -13,7 +12,9 @@ class RadioTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => RadioCubit()..getRadios()..getReciters(),
+      create: (context) => RadioCubit()
+        ..getRadios()
+        ..getReciters(),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Column(
@@ -39,9 +40,13 @@ class RadioTab extends StatelessWidget {
               totalSwitches: 2,
               labels: ['Radio', 'Reciters'],
               onToggle: (index) {
-                final cubit = BlocProvider.of<RadioCubit>(context);
-                if (index != null) {
-                  cubit.changeTab(index);
+                print('Toggled to tab: $index');
+                RadioCubit.get(context).changeTab(index!);
+                if (index == 0) {
+                  RadioCubit.get(context).getRadios();
+                }
+                if (index == 1) {
+                  RadioCubit.get(context).getReciters();
                 }
               },
             ),
@@ -49,43 +54,45 @@ class RadioTab extends StatelessWidget {
             Expanded(
               child: BlocBuilder<RadioCubit, RadioStates>(
                 builder: (context, state) {
+                  final cubit = RadioCubit.get(context);
+
                   if (state is RadioLoading || state is reciterLoading) {
                     return Center(child: CircularProgressIndicator());
-                  } else if (state is RadioError || state is reciterError) {
-                    return Center(
-                      child: Text(
-                        state.toString(),
-                      ),
-                    );
-                  } else if (state is RadioSuccess) {
-                    final radios = state.radios;
-                    print('Displaying Radios: $radios');
+                  }
+
+                  if (state is RadioError || state is reciterError) {
+                    return Center(child: Text('Something went wrong'));
+                  }
+
+                  if (cubit.currentTabIndex == 0) {
+                    if (cubit.radios.isEmpty) {
+                      return Center(child: Text('No radios available'));
+                    }
                     return ListView.separated(
-                      scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        final radio = radios[index];
-                        return RadioItemWidget(radio: radio);
+                        final radio = cubit.radios[index];
+                        return MediaItemWidget(item: radio);
                       },
                       separatorBuilder: (context, index) => SizedBox(height: 8),
-                      itemCount: radios.length,
+                      itemCount: cubit.radios.length,
                     );
-                  } else if (state is reciterSuccess) {
-                    final reciters = state.reciters;
-                    print('Displaying Reciters: $reciters');
+                  } else if (cubit.currentTabIndex == 1) {
+                    if (cubit.reciters.isEmpty) {
+                      return Center(child: Text('No reciters available'));
+                    }
                     return ListView.separated(
-                      scrollDirection: Axis.vertical,
                       itemBuilder: (context, index) {
-                        final reciter = reciters[index];
-                        return RecitersItemWidget(reciter: reciter);
+                        final reciter = cubit.reciters[index];
+                        return MediaItemWidget(item: reciter);
                       },
                       separatorBuilder: (context, index) => SizedBox(height: 8),
-                      itemCount: reciters.length,
+                      itemCount: cubit.reciters.length,
                     );
                   }
                   return Container();
                 },
               ),
-            )
+            ),
           ],
         ),
       ),

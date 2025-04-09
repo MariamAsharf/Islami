@@ -32,3 +32,8 @@ class reciterError extends RadioStates {
 
   reciterError(this.error);
 }
+
+class TabChanged extends RadioStates {
+  final int currentTabIndex;
+  TabChanged(this.currentTabIndex);
+}
